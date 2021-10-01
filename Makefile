@@ -30,5 +30,5 @@ run:
 
 format:
 	$(DUNE) build --auto-promote @fmt
-	opam lint --normalise hello.opam > hello.tmp && mv hello.tmp hello.opam
+	opam lint --normalise tcalc.opam > tcalc.tmp && mv tcalc.tmp tcalc.opam
 	git ls-files '**/*.[ch]' | xargs -n1 indent -nut -i8
