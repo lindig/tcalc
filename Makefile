@@ -25,6 +25,9 @@ clean:
 utop:
 	$(DUNE) utop
 
+run:
+	$(DUNE) exec tcalc
+
 format:
 	$(DUNE) build --auto-promote @fmt
 	opam lint --normalise hello.opam > hello.tmp && mv hello.tmp hello.opam
