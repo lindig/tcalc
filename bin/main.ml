@@ -26,6 +26,7 @@ let result seconds =
   Printf.printf "%5.2f (%02.0f:%02.0f:%05.2f)\n%!" seconds h m s
 
 let main () =
+  ignore @@ LNoise.history_set ~max_length:100;
   let process input =
     let lexbuf = Lexing.from_string input in
     let seconds = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
