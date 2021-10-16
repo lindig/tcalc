@@ -1,17 +1,35 @@
 
 
-![Build](https://github.com/lindig/hello/workflows/CI/badge.svg)
+![Build](https://github.com/lindig/tcalc/workflows/CI/badge.svg)
 
-# Hello
+# TCalc
 
-This is a minimal [OCaml] project that I use as a starting point for new
-projects.
+This is a minimal desktop calculator (taken from the Lex/Yacc section of
+the [OCaml] manual) that can parses `3:04.5` as a time and covert it
+into 184.5 seconds. I'm using it for simple time calculations.
 
-* Top-level Makefile for convenience: just say `make` but the actual
-  build is managed by Dune
-* Minimal command-line handling set up
-* GitHub Actions CI ready
-* Code is in Public Domain
+```
+$ tcalc
+3:04.5
+184.50 (00:03:04.50)
+11:52.2 / 2670 * 500
+133.37 (00:02:13.37)
+$ 
+```
+
+# Installation
+
+This is an [OCaml] project, it assumes you have available on a Unix
+system:
+
+* OCaml
+* Dune
+* Make
+
+```
+make 
+make install
+```
 
 # Contribute
 

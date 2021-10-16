@@ -1,13 +1,12 @@
 opam-version: "2.0"
-synopsis: "Minimal OCaml project for starting a new one"
+synopsis: "Minimal desktop calculator"
 maintainer: "Christian Lindig <lindig@gmail.com>"
 authors: "Christian Lindig <lindig@gmail.com>"
 license: "Unlicense"
-homepage: "https://github.com/lindig/hello"
-bug-reports: "https://github.com/lindig/hello/issues"
+homepage: "https://github.com/lindig/tcalc"
+bug-reports: "https://github.com/lindig/tcalc/issues"
 depends: [
   "dune" {build}
-  "cmdliner"
 ]
 build: ["dune" "build" "-p" name "-j" jobs]
-dev-repo: "git+https://github.com/lindig/hello.git"
+dev-repo: "git+https://github.com/lindig/tcalc.git"
