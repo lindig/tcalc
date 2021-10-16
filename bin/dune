@@ -1,7 +1,7 @@
 (executable
  (public_name tcalc)
  (name main)
- (libraries tcalc))
+ (libraries linenoise tcalc))
 
 (rule
  (alias runtest)

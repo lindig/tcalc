@@ -7,6 +7,7 @@ homepage: "https://github.com/lindig/tcalc"
 bug-reports: "https://github.com/lindig/tcalc/issues"
 depends: [
   "dune" {build}
+  "linenoise"
 ]
 build: ["dune" "build" "-p" name "-j" jobs]
 dev-repo: "git+https://github.com/lindig/tcalc.git"

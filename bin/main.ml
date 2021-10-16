@@ -1,3 +1,16 @@
+(*
+ * main
+ *)
+
+let rec repl prompt cb =
+  match LNoise.linenoise prompt with
+  | None       -> ()
+  | Some ""    -> repl prompt cb
+  | Some input ->
+      cb input;
+      ignore @@ LNoise.history_add input;
+      repl prompt cb
+
 let ( // ) x y =
   let div = x /. y |> Float.trunc in
   let rem = x -. (div *. y) in
@@ -13,12 +26,11 @@ let result seconds =
   Printf.printf "%5.2f (%02.0f:%02.0f:%05.2f)\n%!" seconds h m s
 
 let main () =
-  try
-    let lexbuf = Lexing.from_channel stdin in
-    while true do
-      let seconds = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
-      result seconds
-    done
-  with Tcalc.Lexer.EOF -> exit 0
+  let process input =
+    let lexbuf = Lexing.from_string input in
+    let seconds = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
+    result seconds
+  in
+  repl "tcalc> " process
 
 let () = if !Sys.interactive then () else main ()

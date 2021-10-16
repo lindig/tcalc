@@ -31,4 +31,4 @@ rule token = parse
 | '('             { LPAREN }
 | ')'             { RPAREN }
 
-| eof             { raise EOF }
+| eof             { EOL }
