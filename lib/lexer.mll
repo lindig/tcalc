@@ -30,5 +30,6 @@ rule token = parse
 | '/'             { DIV }
 | '('             { LPAREN }
 | ')'             { RPAREN }
+| '^'             { CARET }
 
 | eof             { EOL }
