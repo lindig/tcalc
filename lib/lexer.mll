@@ -15,7 +15,7 @@ rule token = parse
   [' ' '\t']      { token lexbuf }     (* skip blanks *)
 | ['\n' ]         { EOL }
 
-| seconds  as s   { NUM(atof s) }
+| seconds  as s   { NUM(hms 0.0 0.0 (atof s)) }
 
 | (digits  as m) ':'
   (seconds as s)  { NUM(hms 0.0 (atof m) (atof s)) }
@@ -31,5 +31,7 @@ rule token = parse
 | '('             { LPAREN }
 | ')'             { RPAREN }
 | '^'             { CARET }
+
+| _               { EOL }
 
 | eof             { EOL }

@@ -28,9 +28,12 @@ let result seconds =
 let main () =
   ignore @@ LNoise.history_set ~max_length:100;
   let process input =
-    let lexbuf = Lexing.from_string input in
-    let seconds = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
-    result seconds
+    try
+      let lexbuf = Lexing.from_string input in
+      let seconds = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
+      result seconds
+    with e ->
+      Printf.printf "can't parse '%s': %s\n%!" input (Printexc.to_string e)
   in
   repl "tcalc> " process
 
