@@ -27,13 +27,13 @@ let result seconds =
 
 let main () =
   ignore @@ LNoise.history_set ~max_length:100;
-  let process input =
+  let calc input =
     try
       let lexbuf = Lexing.from_string input in
       let seconds = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
       result seconds
     with _ -> Printf.printf "syntax error in \"%s\"\n%!" input
   in
-  repl "tcalc> " process
+  repl "tcalc> " calc
 
 let () = if !Sys.interactive then () else main ()
