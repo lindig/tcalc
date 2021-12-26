@@ -4,8 +4,8 @@
 
 let rec repl prompt cb =
   match LNoise.linenoise prompt with
-  | None       -> ()
-  | Some ""    -> repl prompt cb
+  | None -> ()
+  | Some "" -> repl prompt cb
   | Some input ->
       cb input;
       ignore @@ LNoise.history_add input;
