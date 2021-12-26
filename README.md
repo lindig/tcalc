@@ -5,8 +5,8 @@
 # TCalc
 
 This is a minimal desktop calculator (taken from the Lex/Yacc section of
-the [OCaml] manual) that can parses `3:04.5` as a time and covert it
-into 184.5 seconds. I'm using it for simple time calculations.
+the [OCaml] manual) that can parse `3:04.5` as a time and covert it into
+184.5 seconds. I'm using it for simple time calculations.
 
 ```
 $ tcalc
