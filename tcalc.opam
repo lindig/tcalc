@@ -1,5 +1,9 @@
 opam-version: "2.0"
-synopsis: "Minimal desktop calculator"
+synopsis: "Minimal desktop calculator for timestamps"
+description: """
+TCalc implements a minimal desktop calculator that in addition to
+floating point numbers recognises durations in hh:min:sec format and
+converts them to seconds. This can simplify time-based calculations."""
 maintainer: "Christian Lindig <lindig@gmail.com>"
 authors: "Christian Lindig <lindig@gmail.com>"
 license: "Unlicense"
@@ -7,7 +11,8 @@ homepage: "https://github.com/lindig/tcalc"
 bug-reports: "https://github.com/lindig/tcalc/issues"
 depends: [
   "dune" {build}
-  "linenoise"
+  "ocaml" {>= "4.08.0"}
+  "linenoise" {>= "1.3.1"}
 ]
 build: ["dune" "build" "-p" name "-j" jobs]
 dev-repo: "git+https://github.com/lindig/tcalc.git"
