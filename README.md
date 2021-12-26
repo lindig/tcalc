@@ -17,7 +17,16 @@ $ tcalc
 $ 
 ```
 
-# Installation
+# Installation via Opam
+
+[Opam] is the [OCaml] package manager that installs packages by
+compiling them from source code.
+
+```
+$ opam install tcalc
+```
+
+# Installation from Sources
 
 This is an [OCaml] project, it assumes you have available on a Unix
 system:
@@ -37,3 +46,4 @@ If you find this useful, please contribute back by raising pull
 requests for improvements you made.
 
 [OCaml]:  https://www.ocaml.org/
+[Opam]:   http://opam.ocaml.org
