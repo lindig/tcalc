@@ -27,12 +27,17 @@ let lookup id = Hashtbl.find_opt t id |> function
 %%
 
 main:
-    expr EOL                { $1 }
+      expr EOL              { $1 }
+    | stmt EOL              { $1 }
 ;
+
+stmt:
+    ID EQUAL expr           { add $1 $3; $3 }
+;
+
 expr:
     NUM                     { $1 }
   | ID                      { lookup $1 }
-  | ID EQUAL expr           { add $1 $3; $3 }
   | LPAREN expr RPAREN      { $2 }
   | expr PLUS expr          { $1 +. $3 }
   | expr MINUS expr         { $1 -. $3 }
