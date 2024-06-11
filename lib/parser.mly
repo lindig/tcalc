@@ -27,7 +27,7 @@ let lookup id = Hashtbl.find_opt t id |> function
 %%
 
 main:
-      expr EOL              { Some $1 }
+      expr EOL              { add "_" $1; Some $1 }
     | stmt EOL              { None    }
 ;
 

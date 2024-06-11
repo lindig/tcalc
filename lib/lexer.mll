@@ -8,7 +8,7 @@
 
 let digit  = ['0'-'9']
 let digits = digit digit*
-let alpha  = ['a'-'z']
+let alpha  = ['a'-'z' '_']
 let id     = alpha (digit|alpha)*
 
 let seconds = digits  ('.' digits)?
