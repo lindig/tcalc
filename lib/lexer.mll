@@ -8,6 +8,8 @@
 
 let digit  = ['0'-'9']
 let digits = digit digit*
+let alpha  = ['a'-'z']
+let id     = alpha (digit|alpha)*
 
 let seconds = digits  ('.' digits)?
 
@@ -31,7 +33,8 @@ rule token = parse
 | '('             { LPAREN }
 | ')'             { RPAREN }
 | '^'             { CARET }
-
+| '='             { EQUAL }
+| id as id        { ID(id) }
 | _               { EOL }
 
 | eof             { EOL }
