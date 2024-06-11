@@ -30,8 +30,9 @@ let main () =
   let calc input =
     try
       let lexbuf = Lexing.from_string input in
-      let seconds = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
-      result seconds
+      match Tcalc.Parser.main Tcalc.Lexer.token lexbuf with
+      | Some seconds -> result seconds
+      | None -> ()
     with _ -> Printf.printf "syntax error in \"%s\"\n%!" input
   in
   repl "tcalc> " calc

@@ -23,12 +23,12 @@ let lookup id = Hashtbl.find_opt t id |> function
 %right CARET
 
 %start main             /* the entry point */
-%type <float> main
+%type <float option> main
 %%
 
 main:
-      expr EOL              { $1 }
-    | stmt EOL              { $1 }
+      expr EOL              { Some $1 }
+    | stmt EOL              { None    }
 ;
 
 stmt:
