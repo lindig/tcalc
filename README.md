@@ -16,6 +16,9 @@ $ tcalc
 133.37 (00:02:13.37)
 $ 
 ```
+* Operators: + - * / ^
+* Command line editing and history
+* Variables
 
 # Installation via Opam
 
