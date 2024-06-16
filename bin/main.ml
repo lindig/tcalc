@@ -33,7 +33,9 @@ let main () =
       match Tcalc.Parser.main Tcalc.Lexer.token lexbuf with
       | Some seconds -> result seconds
       | None -> ()
-    with _ -> Printf.printf "syntax error in \"%s\"\n%!" input
+    with
+    | Failure msg -> Printf.printf "syntax error in \"%s\": %s\n%!" input msg
+    | _ -> Printf.printf "syntax error in \"%s\"\n%!" input
   in
   repl "tcalc> " calc
 
