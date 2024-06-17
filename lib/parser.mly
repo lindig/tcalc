@@ -37,7 +37,7 @@ let apply f args = match f, args with
 %left PLUS MINUS        /* lowest precedence */
 %left TIMES DIV         /* medium precedence */
 %right CARET
-%left ID
+%right ID
 %nonassoc LPAREN NUM UMINUS
 
 %start main             /* the entry point */
