@@ -1,32 +1,6 @@
 
 %{
 
-let fail fmt = Printf.ksprintf failwith fmt
-
-let t = Hashtbl.create 10
-
-let () = List.iter (fun (id, num) -> Hashtbl.replace t id num)
-  [ ("e", Float.exp 1.0)
-  ; ("pi", Float.pi)
-  ]
-
-let add id num = Hashtbl.replace t id num
-
-let lookup id = Hashtbl.find_opt t id |> function
-  | Some v -> v
-  | None -> fail "unknown value %s" id
-
-let apply f args = match f, args with
-  | "log10", [x] -> Float.log10 x
-  | "log", [x] -> Float.log x
-  | "logn", [x; y] -> Float.log x /. Float.log y
-  | "sin", [x] -> Float.sin x
-  | "cos", [x] -> Float.cos x
-  | "tan", [x] -> Float.tan x
-  | "abs", [x] -> Float.abs x
-  | id, [] -> lookup id
-  | id, _ -> fail "function %s/%d is unknown" id (List.length args)
-
 %}
 
 %token <float> NUM
@@ -45,12 +19,12 @@ let apply f args = match f, args with
 %%
 
 main:
-      expr EOL              { add "_" $1; Some $1 }
-    | stmt EOL              { None    }
+      expr EOL              { Ast.(eval (Expr $1)) }
+    | stmt EOL              { Ast.eval $1 }
 ;
 
 stmt:
-    ID EQUAL expr           { add $1 $3; $3 }
+    ID EQUAL expr           { Ast.Define ($1, $3) }
 ;
 
 app:
@@ -59,13 +33,13 @@ app:
   ;
 
 expr:
-    NUM                     { $1 }
-  | app %prec ID            { match $1 with (f, args) -> apply f (List.rev args)}
+    NUM                     { Ast.Const $1 }
+  | app %prec ID            { match $1 with (f, args) -> Ast.Apply(f, List.rev args)}
   | LPAREN expr RPAREN      { $2 }
-  | expr PLUS expr          { $1 +. $3 }
-  | expr MINUS expr         { $1 -. $3 }
-  | expr TIMES expr         { $1 *. $3 }
-  | expr DIV expr           { $1 /. $3 }
-  | expr CARET expr         { Float.pow $1 $3 }
-  | MINUS expr %prec UMINUS { -. $2 }
+  | expr PLUS expr          { Ast.(BinOp($1,Add,$3)) }
+  | expr MINUS expr         { Ast.(BinOp($1,Sub,$3)) } 
+  | expr TIMES expr         { Ast.(BinOp($1,Mul,$3)) }
+  | expr DIV expr           { Ast.(BinOp($1,Div,$3)) }
+  | expr CARET expr         { Ast.(BinOp($1,Pow,$3)) }
+  | MINUS expr %prec UMINUS { Ast.(UnOp(Neg,$2)) }
 ;
