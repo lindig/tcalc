@@ -30,7 +30,9 @@ let main () =
   let calc input =
     try
       let lexbuf = Lexing.from_string input in
-      match Tcalc.Parser.main Tcalc.Lexer.token lexbuf with
+      let ast = Tcalc.Parser.main Tcalc.Lexer.token lexbuf in
+      Tcalc.Sexpr.print 80 (Tcalc.Ast.sexpr ast);
+      match Tcalc.Ast.eval ast with
       | Some seconds -> result seconds
       | None -> ()
     with
