@@ -22,7 +22,7 @@ let () = List.iter (fun (id, num) -> Hashtbl.replace t id num)
   ; ("pi", Float.pi)
   ]
 
-let add id num = Hashtbl.replace t id num
+let define id num = Hashtbl.replace t id num
 
 let lookup id = Hashtbl.find_opt t id |> function
   | Some v -> v
@@ -41,7 +41,7 @@ let apply f args = match f, args with
 
 let rec eval = function
 	| Expr e -> Some (eval_expr e)
-	| Define (id, e) -> add id (eval_expr e); None
+	| Define (id, e) -> define id (eval_expr e); None
 
 and eval_expr = function
 	| Const x -> x
