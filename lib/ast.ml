@@ -63,7 +63,7 @@ let sprintf = Printf.sprintf
 
 let rec sexpr = function
   | Expr e -> sexpr' e
-  | Define (id, e) -> node id [ sexpr' e ]
+  | Define (id, e) -> node "define" [ atom id; sexpr' e ]
 
 and sexpr' = function
   | Const x -> atom (sprintf "%5.2f" x)

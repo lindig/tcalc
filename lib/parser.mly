@@ -23,7 +23,9 @@ main:
                               Sexpr.print 80 (Ast.sexpr expr);
                               Ast.eval expr
                             }
-    | stmt EOL              { Ast.eval $1 }
+    | stmt EOL              { Sexpr.print 80 (Ast.sexpr $1);
+                              Ast.eval $1 
+                            }
 ;
 
 stmt:
