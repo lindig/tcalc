@@ -28,6 +28,9 @@ utop:
 run:
 	$(DUNE) exec tcalc
 
+yacc:
+	ocamlyacc -v lib/parser.mly
+
 format:
 	$(DUNE) build --auto-promote @fmt
 	opam lint --normalise tcalc.opam > tcalc.tmp && mv tcalc.tmp tcalc.opam
