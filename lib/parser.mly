@@ -19,7 +19,10 @@
 %%
 
 main:
-      expr EOL              { Ast.(eval (Expr $1)) }
+      expr EOL              { let expr = Ast.Expr $1 in
+                              Sexpr.print 80 (Ast.sexpr expr);
+                              Ast.eval expr
+                            }
     | stmt EOL              { Ast.eval $1 }
 ;
 
