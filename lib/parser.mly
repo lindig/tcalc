@@ -15,21 +15,18 @@
 %nonassoc LPAREN NUM UMINUS
 
 %start main             /* the entry point */
-%type <float option> main
+%type <Ast.t> main
 %%
 
 main:
-      expr EOL              { let expr = Ast.Expr $1 in
-                              Sexpr.print 80 (Ast.sexpr expr);
-                              Ast.eval expr
-                            }
-    | stmt EOL              { Sexpr.print 80 (Ast.sexpr $1);
-                              Ast.eval $1 
+      expr EOL              { Ast.Expr $1 }
+    | stmt EOL              { match $1 with
+                              id,expr -> Ast.Define (id, expr)
                             }
 ;
 
 stmt:
-    ID EQUAL expr           { Ast.Define ($1, $3) }
+    ID EQUAL expr           { ($1, $3) }
 ;
 
 app:
