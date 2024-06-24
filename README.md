@@ -18,7 +18,10 @@ $
 ```
 * Operators: + - * / ^
 * Command line editing and history
-* Variables
+* Variables (x = 21 * 2)
+
+To help with debugging the parser, the parsed expression is emitted in
+prefix syntax.
 
 # Installation via Opam
 
