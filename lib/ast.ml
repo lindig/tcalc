@@ -34,6 +34,9 @@ let apply f args =
   | "cos", [ x ] -> Float.cos x
   | "tan", [ x ] -> Float.tan x
   | "abs", [ x ] -> Float.abs x
+  | "asin", [ x ] -> Float.asin x
+  | "acos", [ x ] -> Float.acos x
+  | "atan", [ x ] -> Float.atan x
   | id, [] -> lookup id
   | id, _ -> fail "function %s/%d is unknown" id (List.length args)
 
