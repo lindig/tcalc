@@ -37,6 +37,7 @@ let apply f args =
   | "asin", [ x ] -> Float.asin x
   | "acos", [ x ] -> Float.acos x
   | "atan", [ x ] -> Float.atan x
+  | "exp", [ x ] -> Float.exp x
   | id, [] -> lookup id
   | id, _ -> fail "function %s/%d is unknown" id (List.length args)
 
