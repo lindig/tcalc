@@ -16,7 +16,7 @@ let t = Hashtbl.create 10
 let () =
   List.iter
     (fun (id, num) -> Hashtbl.replace t id num)
-    [ ("e", Float.exp 1.0); ("pi", Float.pi) ]
+    [ ("e", Float.exp 1.0); ("pi", Float.pi); ("length8", 8.4) ]
 
 let define id num = Hashtbl.replace t id num
 
@@ -25,11 +25,14 @@ let lookup id =
   | Some v -> v
   | None -> fail "unknown value %s" id
 
+let cover dist rate = 30_000.0 /. (rate *. (lookup "length8" +. dist))
+
 let apply f args =
   match (f, args) with
   | "log10", [ x ] -> Float.log10 x
   | "log", [ x ] -> Float.log x
   | "logn", [ x; y ] -> Float.log x /. Float.log y
+  | "cover", [ x; y ] -> cover x y
   | "sin", [ x ] -> Float.sin x
   | "cos", [ x ] -> Float.cos x
   | "tan", [ x ] -> Float.tan x
