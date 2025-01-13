@@ -41,9 +41,7 @@ let is_alpha = function
   | '_' -> true
   | _ -> false
 
-(** Given a string, return the last word in it or an empty string if the
-    last character is not alphanumeric *)
-let last_word str =
+let split str =
   let len = String.length str in
   let rec loop = function
     | i when i < 0 -> len
@@ -51,11 +49,12 @@ let last_word str =
     | i -> len - i - 1
   in
   let word = loop (len - 1) in
-  String.sub str (len - word) word
+  (String.sub str 0 (len - word), String.sub str (len - word) word)
 
-(** Given [prefix] return a list of possible functions that have this
-      prefix in their name. *)
-let completions prefix = List.filter (String.starts_with ~prefix) functions
+let completions line =
+  let left, right = split line in
+  List.filter (String.starts_with ~prefix:right) functions
+  |> List.map (fun completion -> String.concat "" [ left; completion ])
 
 let define id num = Hashtbl.replace t id num
 

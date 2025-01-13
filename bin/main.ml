@@ -25,8 +25,13 @@ let result seconds =
   let h, m, s = hms seconds in
   Printf.printf "%5.2f (%02.0f:%02.0f:%05.2f)\n%!" seconds h m s
 
+let completions line completions =
+  let words = Tcalc.Ast.completions line in
+  List.iter (LNoise.add_completion completions) words
+
 let main () =
   ignore @@ LNoise.history_set ~max_length:100;
+  LNoise.set_completion_callback completions;
   let calc input =
     try
       let lexbuf = Lexing.from_string input in
