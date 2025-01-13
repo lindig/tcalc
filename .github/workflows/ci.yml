@@ -12,7 +12,6 @@ jobs:
         operating-system:
           - ubuntu-latest
         ocaml-compiler:
-          - 4.12.0
           - 4.14.0
     steps:
       - name: Checkout code
