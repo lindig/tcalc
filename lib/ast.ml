@@ -18,6 +18,45 @@ let () =
     (fun (id, num) -> Hashtbl.replace t id num)
     [ ("e", Float.exp 1.0); ("pi", Float.pi); ("length8", 8.4) ]
 
+let functions =
+  [
+    "log10"
+  ; "log"
+  ; "logn"
+  ; "cover"
+  ; "sin"
+  ; "cos"
+  ; "tan"
+  ; "abs"
+  ; "asin"
+  ; "acos"
+  ; "atan"
+  ; "exp"
+  ]
+
+let is_alpha = function
+  | 'a' .. 'z' -> true
+  | 'A' .. 'Z' -> true
+  | '0' .. '9' -> true
+  | '_' -> true
+  | _ -> false
+
+(** Given a string, return the last word in it or an empty string if the
+    last character is not alphanumeric *)
+let last_word str =
+  let len = String.length str in
+  let rec loop = function
+    | i when i < 0 -> len
+    | i when is_alpha str.[i] -> loop (i - 1)
+    | i -> len - i - 1
+  in
+  let word = loop (len - 1) in
+  String.sub str (len - word) word
+
+(** Given [prefix] return a list of possible functions that have this
+      prefix in their name. *)
+let completions prefix = List.filter (String.starts_with ~prefix) functions
+
 let define id num = Hashtbl.replace t id num
 
 let lookup id =
