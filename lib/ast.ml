@@ -41,6 +41,10 @@ let is_alpha = function
   | '_' -> true
   | _ -> false
 
+(** split a line into two by splittin off the last word. The last word
+      could be used to select a possible completion. If there is no last
+      word (for example, the last character is a space), the last word
+      in an empty string *)
 let split str =
   let len = String.length str in
   let rec loop = function
@@ -51,6 +55,10 @@ let split str =
   let word = loop (len - 1) in
   (String.sub str 0 (len - word), String.sub str (len - word) word)
 
+(** Suggest completions for [line]. This is based on the last word in
+    the line, assuming it is a prefix of a word that we could complete.
+    We return a list of (extended) lines and not just the completion we
+    found *)
 let completions line =
   let left, right = split line in
   List.filter (String.starts_with ~prefix:right) functions
