@@ -16,9 +16,12 @@ $ tcalc
 133.37 (00:02:13.37)
 $ 
 ```
+
 * Operators: + - * / ^
+* Common math functions like `sin`, `log`, `exp`
 * Command line editing and history
 * Variables (x = 21 * 2)
+* Tab completion for functions
 
 To help with debugging the parser, the parsed expression is emitted in
 prefix syntax.
