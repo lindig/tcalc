@@ -17,7 +17,7 @@
  (name tcalc)
  (synopsis "Minimal desktop calculator for timestamps")
  (description
-  "TCalc implements a minimal desktop calculator that in addition to\n  floating point numbers recognises durations in hh:min:sec format and\n  converts them to seconds. This can simplify time-based calculations.\n  This command-line application provides command-line editing and\n  history. Command math functions line sin or exp are available.")
+  "TCalc implements a minimal desktop calculator that in addition to  floating point numbers recognises durations in hh:min:sec format and  converts them to seconds. This can simplify time-based calculations.  This command-line application provides command-line editing and  history. Common math functions line sin or exp are available.")
  (depends
   (dune
    (>= "2.0"))

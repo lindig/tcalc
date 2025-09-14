@@ -28,6 +28,9 @@ utop:
 run:
 	$(DUNE) exec tcalc
 
+deps:
+	opam install --deps-only -y .
+
 yacc:
 	ocamlyacc -v lib/parser.mly
 
