@@ -13,12 +13,44 @@ type t = Expr of expr | Define of string * expr
 let fail fmt = Printf.ksprintf failwith fmt
 let t = Hashtbl.create 10
 
-let () =
-  List.iter
-    (fun (id, num) -> Hashtbl.replace t id num)
-    [ ("e", Float.exp 1.0); ("pi", Float.pi); ("length8", 8.4) ]
+let constants =
+  [
+    ("e", Float.exp 1.0)
+  ; ("pi", Float.pi)
+  ; ("length8", 8.4)
+  ; ("m8p", (5.0 *. 60.0) +. 18.0)
+  ; ("m4x", (5.0 *. 60.0) +. 31.0)
+  ; ("m4m", (5.0 *. 60.0) +. 41.0)
+  ; ("m4p", (5.0 *. 60.0) +. 53.0)
+  ; ("m2x", (6.0 *. 60.0) +. 00.0)
+  ; ("m2m", (6.0 *. 60.0) +. 11.0)
+  ; ("m1x", (6.0 *. 60.0) +. 32.0)
+  ; ("lm8p", (5.0 *. 60.0) +. 26.0)
+  ; ("lm4x", (5.0 *. 60.0) +. 39.0)
+  ; ("lm4m", (5.0 *. 60.0) +. 46.0)
+  ; ("lm4p", (6.0 *. 60.0) +. 01.0)
+  ; ("lm2x", (6.0 *. 60.0) +. 07.0)
+  ; ("lm2m", (6.0 *. 60.0) +. 20.0)
+  ; ("lm1x", (6.0 *. 60.0) +. 38.0)
+  ; ("w8p", (5.0 *. 60.0) +. 53.0)
+  ; ("w4x", (6.0 *. 60.0) +. 06.0)
+  ; ("w4m", (6.0 *. 60.0) +. 18.0)
+  ; ("w4p", (6.0 *. 60.0) +. 32.0)
+  ; ("w2x", (6.0 *. 60.0) +. 38.0)
+  ; ("w2m", (6.0 *. 60.0) +. 51.0)
+  ; ("w1x", (7.0 *. 60.0) +. 09.0)
+  ; ("lw8p", (6.0 *. 60.0) +. 07.0)
+  ; ("lw4x", (6.0 *. 60.0) +. 15.0)
+  ; ("lw4m", (6.0 *. 60.0) +. 27.0)
+  ; ("lw4p", (6.0 *. 60.0) +. 39.0)
+  ; ("lw2x", (6.0 *. 60.0) +. 45.0)
+  ; ("lw2m", (7.0 *. 60.0) +. 00.0)
+  ; ("lw1x", (7.0 *. 60.0) +. 15.0)
+  ]
 
-let functions =
+let () = List.iter (fun (id, num) -> Hashtbl.replace t id num) constants
+
+let symbols =
   [
     "log10"
   ; "log"
@@ -33,6 +65,7 @@ let functions =
   ; "atan"
   ; "exp"
   ]
+  @ List.map fst constants
 
 let is_alpha = function
   | 'a' .. 'z' -> true
@@ -59,7 +92,7 @@ let split str =
     of (extended) lines and not just the completion we found *)
 let completions line =
   let left, right = split line in
-  List.filter (String.starts_with ~prefix:right) functions
+  List.filter (String.starts_with ~prefix:right) symbols
   |> List.map (fun completion -> String.concat "" [ left; completion ])
 
 let define id num = Hashtbl.replace t id num
